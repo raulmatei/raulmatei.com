@@ -96,9 +96,9 @@ h1 {
 
 .player {
   position: relative;
-  width: 64px;
-  height: 64px;
-  padding: 22px;
+  width: 48px;
+  height: 49px;
+  padding: 12px;
 
   border: 0 none;
   background-color: transparent;
@@ -125,6 +125,28 @@ h1 {
 
   &-wrapper {
     margin: 0 auto;
+  }
+
+  &-time {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 3px 3px 2px;
+
+    font-size: 9px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    line-height: 1;
+    color: #ccc;
+
+    background-color: rgba(0, 0, 0, 0.65);
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+
+    z-index: 2;
   }
 
   &-progress {

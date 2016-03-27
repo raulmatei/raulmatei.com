@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PlayButton, Progress } from 'react-soundplayer/components';
+import { PlayButton, Progress, Timer } from 'react-soundplayer/components';
 
 class Player extends Component {
   play() {
@@ -26,6 +26,14 @@ class Player extends Component {
 
     return (
       <div className='player-wrapper'>
+        {
+          playing ?
+            <Timer
+              className='player-time'
+              duration={duration}
+              currentTime={currentTime}
+            /> : null
+        }
         <PlayButton
           className='player'
           playing={playing}
