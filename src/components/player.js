@@ -18,9 +18,11 @@ class Player extends Component {
       playing,
       soundCloudAudio,
       currentTime,
-      duration
+      duration,
+      alreadyPlayed
     } = this.props;
-    const value = currentTime / duration * 100 || 0;
+
+    const value = alreadyPlayed ? 100 : (currentTime / duration * 100 || 0);
 
     return (
       <div className='player-wrapper'>

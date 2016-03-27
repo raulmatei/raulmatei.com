@@ -10,6 +10,8 @@ const COPYRIGHT = `\u00A9 2008 – ${moment().format('YYYY')} Raul Matei`;
 
 const Container = (props) => {
   const { posts, operations } = props;
+  const currentPlayingId = operations.get('playing');
+  const endedList = operations.get('ended');
 
   return (
     <section className='container'>
@@ -27,6 +29,9 @@ const Container = (props) => {
 
             const date = moment(recorderAt, 'YYYYMMDD').fromNow();
 
+            const isCurrentPlayingSong = currentPlayingId === id;
+            const songAlreadyPlayed = endedList.contains(id);
+
             return (
               <li className='post' key={id}>
                 <div className='post-left'>
@@ -34,10 +39,13 @@ const Container = (props) => {
                     clientId={clientId}
                     resolveUrl={songUrl}
                     onStartTrack={() => actions.operations.play(id)}
-                    onStopTrack={() => actions.operations.end(id)}
                     onPauseTrack={() => actions.operations.pause(id)}
+                    onStopTrack={() => actions.operations.end(id)}
                   >
-                    <Player playing={operations.get('playing') === id}/>
+                    <Player
+                      playing={isCurrentPlayingSong}
+                      alreadyPlayed={songAlreadyPlayed}
+                    />
                   </SoundPlayerContainer>
                 </div>
                 <div className='post-right'>

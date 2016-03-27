@@ -1,11 +1,17 @@
 import * as ActionTypes from './action-types';
 
 function handlePlaySong(currentState, id) {
-  return currentState.withMutations(
-    (state) =>
-      state.set('playing', id)
-        .set('paused', null)
-  );
+  const ended = currentState.get('ended');
+  const isCurrentPlayingInEndedList = ended.contains(id);
+
+  return currentState.withMutations((state) => {
+    if (isCurrentPlayingInEndedList) {
+      return state.set('ended', ended.remove(id))
+        .set('playing', id);
+    }
+
+    return state.set('playing', id);
+  });
 }
 
 function handlePauseSong(currentState, id) {
@@ -17,11 +23,11 @@ function handlePauseSong(currentState, id) {
 }
 
 function handleEndSong(currentState, id) {
-  if (currentState.get('playing') === id) {
-    return currentState.set('playing', null);
-  }
+  const ended = currentState.get('ended');
 
-  return currentState;
+  return currentState.withMutations((state) =>
+    state.set('playing', null)
+      .set('ended', ended.add(id)));
 }
 
 export default {
