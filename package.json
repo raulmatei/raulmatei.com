@@ -10,8 +10,8 @@
   "author": "Raul Matei",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server -d --hot --inline --history-api-fallback",
-    "build": "webpack -p"
+    "start": "webpack-dev-server -d --hot --inline --history-api-fallback --env=development",
+    "build": "webpack --progress -p"
   },
   "dependencies": {
     "frux": "^0.2.1",
