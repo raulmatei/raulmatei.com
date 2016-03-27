@@ -1,0 +1,163 @@
+@import url("//cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css");
+@import url(https://fonts.googleapis.com/css?family=Halant:300&subset=latin,latin-ext);
+
+@font-face {
+  font-family: 'CalligraffitiRegular';
+  src: url('../fonts/Calligraffiti-webfont.eot');
+  src: url('../fonts/Calligraffiti-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Calligraffiti-webfont.woff') format('woff'),
+       url('../fonts/Calligraffiti-webfont.ttf') format('truetype'),
+       url('../fonts/Calligraffiti-webfont.svg#CalligraffitiRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@dark-gray: #999999;
+
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #111111 url("../images/bg.jpg") no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Halant", serif;
+}
+
+h1 {
+  margin: 120px 0 64px;
+  font: 280%/1 'CalligraffitiRegular',serif;
+  font-style: italic;
+  color: @dark-gray;
+  text-align: center;
+}
+
+.container {
+  width: 640px;
+  max-width: 640px;
+
+  margin: 0 auto;
+}
+
+.posts {
+  padding-left: 0;
+
+  list-style-type: none;
+  color: #fff;
+
+  a, h3 {
+    color: @dark-gray;
+    text-decoration: none;
+  }
+}
+
+.post {
+  display: flex;
+  margin-bottom: 14px;
+  padding: 14px;
+  background-color: rgba(5, 5, 5, 0.5);
+  align-items: center;
+
+  &-left {
+    position: relative;
+    display: flex;
+    width: 100px;
+    height: 100px;
+
+    min-width: 100px;
+    min-height: 100px;
+
+    align-items: center;
+    text-align: center;
+
+    border: 4px solid white;
+    background: transparent url("../images/soledad-cover.png") no-repeat center;
+    background-size: cover;
+
+    &:hover {
+      .player-progress {
+        visibility: visible;
+      }
+    }
+  }
+
+  &-right {
+    width: 100%;
+    padding-left: 14px;
+  }
+
+  h3 {
+    margin: 2px 0;
+    font: 150%/1 'CalligraffitiRegular',serif;
+  }
+
+  span {
+    display: block;
+    line-height: 1.2;
+  }
+}
+
+.player {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding: 22px;
+
+  border: 0 none;
+  background-color: transparent;
+
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+
+  z-index: 1;
+
+  .sb-soundplayer-play-icon {
+    fill: rgba(0, 0, 0, 0.35);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &-wrapper {
+    margin: 0 auto;
+  }
+
+  &-progress {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+
+    z-index: 0;
+  }
+
+  &-progress-inner {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+
+    -webkit-transition: width .2s ease-in;
+       -moz-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+  }
+}
+
+footer {
+  margin: 64px 0;
+  text-align: center;
+  color: @dark-gray;
+  font-size: 85%;
+}
