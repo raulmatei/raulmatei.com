@@ -2,13 +2,14 @@ import React from 'react';
 import frux from 'frux';
 import moment from 'moment';
 import Player from './player';
+import { actions } from '../main';
 import { SoundPlayerContainer  } from 'react-soundplayer/addons';
 
 const clientId = 'd5f59cb45845f472b0ae966c6dd23bd7';
 const COPYRIGHT = `\u00A9 2008 – ${moment().format('YYYY')} Raul Matei`;
 
 const Container = (props) => {
-  const { posts } = props;
+  const { posts, operations } = props;
 
   return (
     <section className='container'>
@@ -32,8 +33,11 @@ const Container = (props) => {
                   <SoundPlayerContainer
                     clientId={clientId}
                     resolveUrl={songUrl}
+                    onStartTrack={() => actions.operations.play(id)}
+                    onStopTrack={() => actions.operations.end(id)}
+                    onPauseTrack={() => actions.operations.pause(id)}
                   >
-                    <Player/>
+                    <Player playing={operations.get('playing') === id}/>
                   </SoundPlayerContainer>
                 </div>
                 <div className='post-right'>
@@ -55,11 +59,13 @@ const Container = (props) => {
 Container.displayName = 'Container';
 
 Container.defaultProps = {
-  posts: []
+  posts: [],
+  operations: {}
 };
 
 Container.getDataBindings = (getters) => ({
-  posts: getters.posts.postsData
+  posts: getters.posts.postsData,
+  operations: getters.operations.operationsData
 });
 
 export default frux.connect(Container);

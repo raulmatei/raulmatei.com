@@ -2,36 +2,38 @@ import React, { Component } from 'react';
 import { PlayButton, Progress } from 'react-soundplayer/components';
 
 class Player extends Component {
-  state = { playing: false };
-
-  // TODO: add audio player module
   play() {
     let { soundCloudAudio, playing } = this.props;
 
     if (playing) {
       soundCloudAudio.pause();
-      this.state.playing = false;
     } else {
       soundCloudAudio.play();
-      this.state.playing = true;
     }
-
-    this.setState(this.state);
   }
 
   render() {
-    const { songUrl } = this.props;
+    const {
+      songUrl,
+      playing,
+      soundCloudAudio,
+      currentTime,
+      duration
+    } = this.props;
+    const value = currentTime / duration * 100 || 0;
 
     return (
       <div className='player-wrapper'>
         <PlayButton
           className='player'
-          playing={this.state.playing}
+          playing={playing}
           onTogglePlay={this.play.bind(this)}
         />
         <Progress
           className='player-progress'
           innerClassName='player-progress-inner'
+          value={value}
+          soundCloudAudio={soundCloudAudio}
         />
       </div>
     );

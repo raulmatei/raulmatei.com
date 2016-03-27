@@ -1,6 +1,7 @@
 import frux from 'frux';
 import React from 'react';
 import posts from './modules/posts';
+import operations from './modules/operations';
 import { browserHistory } from 'react-router';
 import { initializeRouter } from './router';
 
@@ -10,7 +11,10 @@ const data = require('json!./resources/posts.json');
 
 export const { actions, getters } = frux.initialize({
   options: { debug: process.env.NODE_ENV === 'development' },
-  posts
+
+  // Load modules
+  posts,
+  operations
 });
 
 export function initialize(options) {

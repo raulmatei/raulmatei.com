@@ -1,14 +1,10 @@
-import { Immutable } from 'nuclear-js';
 import frux from 'frux';
-
 import handlers from './handlers';
 import * as actions from './actions';
 import * as getters from './getters';
 
-
 const initialState = {
-  expression: [0],
-  result: 0
+  playing: null
 };
 
 const stores = {

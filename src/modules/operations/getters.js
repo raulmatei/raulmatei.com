@@ -1,4 +1,4 @@
-export const state = [
+export const operationsData = [
   ['operations'],
   (data) => data
 ];
