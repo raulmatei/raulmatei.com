@@ -43,6 +43,8 @@ class Player extends Component {
           className='player-progress'
           innerClassName='player-progress-inner'
           value={value}
+          style={{}}
+          innerStyle={{}}
           soundCloudAudio={soundCloudAudio}
         />
       </div>

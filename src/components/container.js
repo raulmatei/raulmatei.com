@@ -43,7 +43,7 @@ const Container = (props) => {
                     onStopTrack={() => actions.operations.end(id)}
                   >
                     <Player
-                      playing={isCurrentPlayingSong}
+                      isPlaying={isCurrentPlayingSong}
                       alreadyPlayed={songAlreadyPlayed}
                     />
                   </SoundPlayerContainer>
