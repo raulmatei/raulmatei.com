@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import frux from 'frux';
 import * as main from './src/main';
 
