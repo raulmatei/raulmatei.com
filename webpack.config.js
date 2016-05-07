@@ -1,16 +1,19 @@
 var path = require('path');
 var webpack = require('webpack');
 var parseArgs = require('minimist');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var argv = parseArgs(process.argv.slice(2));
+var distPath = path.resolve(path.resolve(__dirname, './'), './dist');
 
 module.exports = {
   entry: {
-    javascript: './index'
+    application: './index'
   },
 
   output: {
-    filename: './dist/application.js'
+    path: distPath,
+    filename: 'js/[name].js'
   },
 
   module: {
@@ -24,7 +27,7 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex&name=dist/images/[hash].[ext]',
+          'file?hash=sha512&digest=hex&name=images/[name].[ext]',
           'image-webpack?bypassOnDebug&optimizationLevel=12&interlaced=false'
         ]
       },
@@ -36,7 +39,12 @@ module.exports = {
 
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=dist/fonts/[hash].[ext]'
+        loader: 'file-loader?name=fonts/[name].[ext]'
+      },
+
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract('style', 'css!less', { publicPath: '../' })
       }
     ]
   },
@@ -50,6 +58,8 @@ module.exports = {
       'process.env': {
         'NODE_ENV': argv.env === 'development' ? '"development"' : '"production"'
       }
-    })
+    }),
+
+    new ExtractTextPlugin('css/[name].css', { allChunks: true })
   ]
 };
