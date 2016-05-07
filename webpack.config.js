@@ -59,7 +59,12 @@ module.exports = {
         'NODE_ENV': argv.env === 'development' ? '"development"' : '"production"'
       }
     }),
-
-    new ExtractTextPlugin('css/[name].css', { allChunks: true })
+    new webpack.optimize.DedupePlugin(),
+    new ExtractTextPlugin('css/[name].css', { allChunks: true }),
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false
+      }
+    })
   ]
 };
