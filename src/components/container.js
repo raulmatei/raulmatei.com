@@ -25,9 +25,9 @@ const Container = (props) => {
             const composer = post.getIn(['meta', 'composer']);
             const composerDetails = post.getIn(['meta', 'composerDetails']);
             const performer = post.getIn(['meta', 'performer']);
-            const recorderAt = post.getIn(['meta', 'recorderAt']);
+            const recordedAt = post.getIn(['meta', 'recordedAt']);
 
-            const date = moment(recorderAt, 'YYYYMMDD').fromNow();
+            const date = moment(recordedAt, 'YYYYMMDD').fromNow();
 
             const isCurrentPlayingSong = currentPlayingId === id;
             const songAlreadyPlayed = endedList.contains(id);
