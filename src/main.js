@@ -4,7 +4,7 @@ import posts from './modules/posts';
 import operations from './modules/operations';
 import { browserHistory } from 'react-router';
 import { initializeRouter } from './router';
-import data from 'json!./resources/posts.json';
+import data from './resources/posts.json';
 import './styles/application.less';
 
 export const { actions, getters } = frux.initialize({

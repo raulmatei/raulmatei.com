@@ -17,40 +17,49 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel-loader']
+        use: ['react-hot-loader', 'babel-loader']
+      },
+
+      {
+        test: /\.json$/,
+        use: 'json-loader'
       },
 
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=images/[name].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=12&interlaced=false'
+        use: [
+          'file-loader?hash=sha512&digest=hex&name=images/[name].[ext]',
+          'image-webpack-loader?bypassOnDebug&optimizationLevel=12&interlaced=false'
         ]
       },
 
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
       },
 
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        use: 'file-loader?name=fonts/[name].[ext]'
       },
 
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css!less', { publicPath: '../' })
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!less-loader',
+          publicPath: '../'
+        })
       }
     ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
   },
 
   plugins: [
@@ -60,7 +69,11 @@ module.exports = {
       }
     }),
     new webpack.optimize.DedupePlugin(),
-    new ExtractTextPlugin('css/[name].css', { allChunks: true }),
+    new ExtractTextPlugin({
+      filename: 'css/[name].css',
+      allChunks: true
+    }),
+    new webpack.LoaderOptionsPlugin({minimize: true}),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
