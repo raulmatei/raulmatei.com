@@ -20,6 +20,7 @@ const COPYRIGHT = `\u00A9 2008 – ${format(Date.now(), 'YYYY')} Raul Matei`
 
 const Container = (props) => {
   const {
+    dispatch,
     operations,
     posts,
   } = props
@@ -53,9 +54,9 @@ const Container = (props) => {
                     <Player
                       clientId={clientId}
                       resolveUrl={songUrl}
-                      onStartTrack={() => play(id)}
-                      onPauseTrack={() => pause(id)}
-                      onStopTrack={() => end(id)}
+                      onStartTrack={() => dispatch(play(id))}
+                      onPauseTrack={() => dispatch(pause(id))}
+                      onStopTrack={() => dispatch(end(id))}
                       isPlaying={isCurrentPlayingSong}
                       alreadyPlayed={songAlreadyPlayed}
                     />
