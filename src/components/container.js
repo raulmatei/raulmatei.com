@@ -1,7 +1,13 @@
 import React from 'react'
 import {format, distanceInWords} from 'date-fns'
 import {connect} from 'react-redux'
+import {compose} from 'redux'
 import Player from './player'
+import {
+  firebaseConnect,
+  isLoaded,
+} from 'react-redux-firebase'
+
 import {
   play,
   pause,
@@ -26,42 +32,51 @@ const Container = (props) => {
       <h1>Out of this world</h1>
       <ul className='posts'>
         {
-          posts.map((post) => {
-            const id = post.id
-            const title = post.title
-            const songUrl = post.meta.url
-            const composer = post.meta.composer
-            const composerDetails = post.meta.composerDetails
-            const performer = post.meta.performer
-            const recordedAt = post.meta.recordedAt
+          isLoaded(posts) ?
+            posts.map((post) => {
+              const id = post.get('id')
+              const title = post.get('title')
+              const songUrl = post.getIn(['meta', 'url'])
+              const composer = post.getIn(['meta', 'composer'])
+              const composerDetails = post.getIn(['meta', 'composerDetails'])
+              const performer = post.getIn(['meta', 'performer'])
+              const recordedAt = post.getIn(['meta', 'recordedAt'])
 
-            const date = distanceInWords(new Date(recordedAt), Date.now())
+              const date = distanceInWords(new Date(recordedAt), Date.now())
 
-            const isCurrentPlayingSong = currentPlayingId === id
-            const songAlreadyPlayed = endedList.includes(id)
+              const isCurrentPlayingSong = currentPlayingId === id
+              const songAlreadyPlayed = endedList.includes(id)
 
-            return (
-              <li className='post' key={id}>
-                <div className='post-left'>
-                  <Player
-                    clientId={clientId}
-                    resolveUrl={songUrl}
-                    onStartTrack={() => play(id)}
-                    onPauseTrack={() => pause(id)}
-                    onStopTrack={() => end(id)}
-                    isPlaying={isCurrentPlayingSong}
-                    alreadyPlayed={songAlreadyPlayed}
-                  />
-                </div>
-                <div className='post-right'>
-                  <h3>{title}</h3>
-                  <span>Composer: {composer} {composerDetails}</span>
-                  <span>Performer: {performer}</span>
-                  <span>Recorded {date}</span>
-                </div>
-              </li>
+              return (
+                <li className='post' key={id}>
+                  <div className='post-left'>
+                    <Player
+                      clientId={clientId}
+                      resolveUrl={songUrl}
+                      onStartTrack={() => play(id)}
+                      onPauseTrack={() => pause(id)}
+                      onStopTrack={() => end(id)}
+                      isPlaying={isCurrentPlayingSong}
+                      alreadyPlayed={songAlreadyPlayed}
+                    />
+                  </div>
+                  <div className='post-right'>
+                    <h3>{title}</h3>
+                    <span>Composer: {composer} {composerDetails}</span>
+                    <span>Performer: {performer}</span>
+                    <span>Recorded {date}</span>
+                  </div>
+                </li>
+              )
+            }) : (
+              <div className='sk-wave'>
+                <div className='sk-rect sk-rect1'/>
+                <div className='sk-rect sk-rect2'/>
+                <div className='sk-rect sk-rect3'/>
+                <div className='sk-rect sk-rect4'/>
+                <div className='sk-rect sk-rect5'/>
+              </div>
             )
-          })
         }
       </ul>
 
@@ -74,10 +89,12 @@ const Container = (props) => {
 
 Container.defaultProps = {
   operations: {},
-  posts: [],
 }
 
-export default connect((state) => ({
-  operations: state.operations,
-  posts: state.posts.data,
-}))(Container)
+export default compose(
+  firebaseConnect(['posts']),
+  connect((state) => ({
+    operations: state.operations,
+    posts: state.firebase.getIn(['data','posts']),
+  }))
+)(Container)
