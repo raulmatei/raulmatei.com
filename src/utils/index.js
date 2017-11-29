@@ -1,15 +1,15 @@
 export function prettyDate(time) {
   const date = new Date((time || '')
     .replace(/-/g, '/')
-    .replace(/[TZ]/g, ''));
+    .replace(/[TZ]/g, ''))
 
-  const diff = (((new Date()).getTime() - date.getTime()) / 1000);
-  const dayDiff = Math.floor(diff / 86400);
+  const diff = (((new Date()).getTime() - date.getTime()) / 1000)
+  const dayDiff = Math.floor(diff / 86400)
 
   if (isNaN(dayDiff) || dayDiff < 0) {
-    return;
+    return
   }
-      
+
   return (
     dayDiff == 0 && (
     diff < 60 && 'just now' ||
@@ -20,5 +20,5 @@ export function prettyDate(time) {
     dayDiff == 1 && 'Yesterday' ||
     dayDiff < 7 && dayDiff + ' days ago' ||
     dayDiff < 31 && Math.ceil( dayDiff / 7 ) + ' weeks ago'
-  );
+  )
 }

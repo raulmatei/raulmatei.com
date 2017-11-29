@@ -1,13 +1,19 @@
-import React from 'react';
-import { Router } from 'react-router';
-import routes from './routes';
+import React from 'react'
+import {Router} from 'react-router'
+import {Provider} from 'react-redux'
+import routes from './routes'
+import {AppContainer} from 'react-hot-loader'
 
-export function initializeRouter(props) {
+export function initializeRouter(props, store) {
   return (
-    <Router {...props}>
-      {routes}
-    </Router>
-  );
+    <AppContainer>
+      <Provider store={store}>
+        <Router {...props}>
+          {routes}
+        </Router>
+      </Provider>
+    </AppContainer>
+  )
 }
 
-initializeRouter.displayName = 'RouterInitializer';
+initializeRouter.displayName = 'RouterInitializer'

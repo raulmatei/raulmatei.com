@@ -1,16 +1,13 @@
-import frux from 'frux';
-
-import handlers from './handlers';
-import * as actions from './actions';
-import * as getters from './getters';
-
-
 const initialState = {
   data: []
-};
+}
 
-const stores = {
-  posts: frux.createStore(initialState, handlers)
-};
+export default function posts(state = initialState, action) {
+  console.log(action);
+  const data = action.payload
 
-export default frux.createModule({ stores, actions, getters });
+  return {
+    ...state,
+    data,
+  }
+}

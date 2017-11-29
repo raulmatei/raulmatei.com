@@ -1,8 +1,5 @@
-import 'babel-polyfill';
-import frux from 'frux';
-import * as main from './src/main';
+import 'react-hot-loader/patch';
+import 'babel-polyfill'
+import * as main from './src/main'
 
-global.app = {
-  ...main,
-  serialize: frux.serialize
-};
+global.app = main

@@ -1,6 +1,6 @@
-import React, { Children } from 'react';
+import React, {Children} from 'react'
 
-const Root = ({ children }) => Children.only(children);
+const Root = ({children}) => Children.only(children)
 
-Root.displayName = 'Root';
-export default Root;
+Root.displayName = 'Root'
+export default Root

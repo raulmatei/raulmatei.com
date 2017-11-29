@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import { PlayButton, Progress, Timer } from 'react-soundplayer/components';
+import React, {Component} from 'react'
+import {PlayButton, Progress, Timer} from 'react-soundplayer/components'
+import { withSoundCloudAudio } from 'react-soundplayer/addons';
 
 class Player extends Component {
   play() {
-    let { soundCloudAudio, playing } = this.props;
+    let {
+      playing,
+      soundCloudAudio,
+    } = this.props
 
     if (playing) {
-      soundCloudAudio.pause();
+      soundCloudAudio.pause()
     } else {
-      soundCloudAudio.play();
+      soundCloudAudio.play()
     }
   }
 
@@ -20,9 +24,9 @@ class Player extends Component {
       currentTime,
       duration,
       alreadyPlayed
-    } = this.props;
+    } = this.props
 
-    const value = alreadyPlayed ? 100 : (currentTime / duration * 100 || 0);
+    const value = alreadyPlayed ? 100 : (currentTime / duration * 100 || 0)
 
     return (
       <div className='player-wrapper'>
@@ -34,11 +38,13 @@ class Player extends Component {
               currentTime={currentTime}
             /> : null
         }
+
         <PlayButton
           className='player'
           playing={playing}
           onTogglePlay={this.play.bind(this)}
         />
+
         <Progress
           className='player-progress'
           innerClassName='player-progress-inner'
@@ -48,8 +54,8 @@ class Player extends Component {
           soundCloudAudio={soundCloudAudio}
         />
       </div>
-    );
+    )
   }
 }
 
-export default Player;
+export default withSoundCloudAudio(Player)

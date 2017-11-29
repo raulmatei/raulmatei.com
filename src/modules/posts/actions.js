@@ -1,8 +1,6 @@
-import { dispatch } from 'frux';
-
 export function loadPosts(data) {
-  dispatch({ 
+  return {
     type: 'LOAD_DATA',
-    payload: { data }
-  });
+    payload: data,
+  }
 }

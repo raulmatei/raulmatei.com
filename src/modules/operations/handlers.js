@@ -1,37 +1,39 @@
-import * as ActionTypes from './action-types';
+export function handlePlaySong(state, payload) {
+  const {id} = payload
+  const ended = [...state.ended]
+  const index = ended.indexOf(id)
 
-function handlePlaySong(currentState, id) {
-  const ended = currentState.get('ended');
-  const isCurrentPlayingInEndedList = ended.contains(id);
-
-  return currentState.withMutations((state) => {
-    if (isCurrentPlayingInEndedList) {
-      return state.set('ended', ended.remove(id))
-        .set('playing', id);
+  if (index > -1) {
+    return {
+      ...state,
+      ended: ended.splice(index, 1),
+      playing: id,
     }
+  }
 
-    return state.set('playing', id);
-  });
+  return {
+    ...state,
+    playing: id,
+  }
 }
 
-function handlePauseSong(currentState, id) {
-  return currentState.withMutations(
-    (state) =>
-      state.set('paused', id)
-        .set('playing', null)
-  );
+export function handlePauseSong(state, payload) {
+  const {id} = payload
+
+  return {
+    ...state,
+    paused: id,
+    playing: null,
+  }
 }
 
-function handleEndSong(currentState, id) {
-  const ended = currentState.get('ended');
+export function handleEndSong(state, payload) {
+  const {id} = payload
+  const ended = [...state.ended]
 
-  return currentState.withMutations((state) =>
-    state.set('playing', null)
-      .set('ended', ended.add(id)));
+  return {
+    ...state,
+    playing: null,
+    ended: ended.push(id),
+  }
 }
-
-export default {
-  [ActionTypes.PLAY_SONG]: handlePlaySong,
-  [ActionTypes.PAUSE_SONG]: handlePauseSong,
-  [ActionTypes.END_SONG]: handleEndSong
-};
