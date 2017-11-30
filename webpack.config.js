@@ -8,12 +8,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var argv = parseArgs(process.argv.slice(2));
 var distPath = path.resolve(path.resolve(__dirname, './'), './dist');
 
-module.exports = {
+const config = {
   entry: {
     application: './index'
   },
-
-  devtool: 'eval-source-map',
 
   output: {
     path: distPath,
@@ -47,17 +45,21 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              hash: 'sha512',
-              digest: 'hex',
-              name: 'images/[name].[ext]',
+              query: {
+                hash: 'sha512',
+                digest: 'hex',
+                name: 'images/[name].[ext]',
+              },
             },
           },
           {
             loader: 'image-webpack-loader',
             options: {
-              bypassOnDebug: true,
-              optimizationLevel: 12,
-              interlaced: false,
+              query: {
+                bypassOnDebug: true,
+                optimizationLevel: 12,
+                interlaced: false,
+              },
             },
           },
         ],
@@ -84,7 +86,9 @@ module.exports = {
          {
             loader: 'file-loader',
             options: {
-              name: 'images/[name].[ext]',
+              query: {
+                name: 'images/[name].[ext]',
+              },
             },
           },
         ],
@@ -110,9 +114,9 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': argv.env === 'development' ? '"development"' : '"production"'
-      }
+      'process.env.NODE_ENV': argv.env === 'development' ?
+        JSON.stringify('development') :
+        JSON.stringify('production'),
     }),
 
     new ExtractTextPlugin({
@@ -133,19 +137,12 @@ module.exports = {
       },
       template: 'index.html',
     }),
+  ],
+};
 
-    new webpack.HotModuleReplacementPlugin(),
-  ].concat(argv.env === 'development' ? [
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        output: {
-          comments: false
-        },
-      },
-    }),
-  ] : []),
-
-  devServer: {
+if (argv.env === 'development') {
+  config.devtool = 'eval-source-map'
+  config.devServer = {
     contentBase: path.resolve(__dirname, './'),
     historyApiFallback: true,
     hot: true,
@@ -153,4 +150,18 @@ module.exports = {
     open: 'Google Chrome',
     port: 8080,
   }
-};
+
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
+} else {
+  config.plugins.push(
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        output: {
+          comments: false
+        },
+      },
+    })
+  )
+}
+
+module.exports = config
