@@ -1,18 +1,7 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css");
-@import url(https://fonts.googleapis.com/css?family=Halant:300&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Calligraffitti|Libre+Baskerville:400,400i);
 
-@font-face {
-  font-family: 'CalligraffitiRegular';
-  src: url('../fonts/Calligraffiti-webfont.eot');
-  src: url('../fonts/Calligraffiti-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Calligraffiti-webfont.woff') format('woff'),
-       url('../fonts/Calligraffiti-webfont.ttf') format('truetype'),
-       url('../fonts/Calligraffiti-webfont.svg#CalligraffitiRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@dark-gray: #999999;
+@dark-color: #8B8378;
 
 html {
   height: 100%;
@@ -21,18 +10,23 @@ html {
 }
 
 body {
-  background: #111111 url("../images/bg.jpg") no-repeat;
+  background: #292421 url("../images/bg.jpg") no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  font-family: "Halant", serif;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 400;
+  font-size: 100%;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 h1 {
   margin: 120px 0 64px;
-  font: 280%/1 'CalligraffitiRegular',serif;
-  font-style: italic;
-  color: @dark-gray;
+  font-family: 'Calligraffitti', cursive;
+  font-size: 280%;
+  line-height: 1;
+  color: @dark-color;
   text-align: center;
+  font-weight: 400;
 }
 
 .container {
@@ -49,7 +43,7 @@ h1 {
   color: #fff;
 
   a, h3 {
-    color: @dark-gray;
+    color: @dark-color;
     text-decoration: none;
   }
 }
@@ -85,12 +79,16 @@ h1 {
 
   h3 {
     margin: 2px 0;
-    font: 150%/1 'CalligraffitiRegular',serif;
+    font-family: 'Calligraffitti', cursive;
+    font-size: 150%;
+    font-weight: 400;
+    line-height: 1;
   }
 
-  span {
+  span, em {
     display: block;
-    line-height: 1.2;
+    line-height: 1.4;
+    font-size: 75%;
   }
 }
 
@@ -186,7 +184,7 @@ h1 {
 footer {
   margin: 64px 0;
   text-align: center;
-  color: @dark-gray;
+  color: @dark-color;
   font-size: 85%;
 }
 

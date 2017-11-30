@@ -65,7 +65,7 @@ const Container = (props) => {
                     <h3>{title}</h3>
                     <span>Composer: {composer} {composerDetails}</span>
                     <span>Performer: {performer}</span>
-                    <span>Recorded {date}</span>
+                    <em>Recorded {date} ago</em>
                   </div>
                 </li>
               )
