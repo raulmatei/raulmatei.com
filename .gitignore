@@ -17,5 +17,7 @@
 .DS_Store?
 Thumbs.db
 desktop.ini
+index.html
 
 node_modules/
+dist/
