@@ -121,7 +121,7 @@ const config = {
         collapseWhitespace: true,
         preserveLineBreaks: false,
       },
-      template: 'index.html',
+      template: 'src/index.html',
     }),
   ],
 };
@@ -129,7 +129,7 @@ const config = {
 if (argv.env === 'development') {
   config.devtool = 'eval-source-map'
   config.devServer = {
-    contentBase: path.resolve(__dirname, './'),
+    contentBase: path.resolve(__dirname, './src'),
     historyApiFallback: true,
     hot: true,
     inline: true,

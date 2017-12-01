@@ -8,6 +8,7 @@ import {
 const initialState = {
   playing: null,
   ended: [],
+  paused: [],
 }
 
 export default function operations(state = initialState, action) {
