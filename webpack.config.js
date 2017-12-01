@@ -4,6 +4,7 @@ var parseArgs = require('minimist');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin')
 
 var argv = parseArgs(process.argv.slice(2));
 var distPath = path.resolve(path.resolve(__dirname, './'), './dist');
@@ -115,6 +116,7 @@ const config = {
     }),
 
     new HtmlWebpackPlugin({
+      alwaysWriteToDisk: true,
       hash: true,
       inject: 'body',
       minify: {
@@ -123,13 +125,18 @@ const config = {
       },
       template: 'src/index.html',
     }),
+
+    new HtmlWebpackHardiskPlugin({
+      outputPath: path.resolve(__dirname, './'),
+    }),
   ],
 };
 
 if (argv.env === 'development') {
   config.devtool = 'eval-source-map'
+
   config.devServer = {
-    contentBase: path.resolve(__dirname, './src'),
+    contentBase: path.resolve(__dirname),
     historyApiFallback: true,
     hot: true,
     inline: true,

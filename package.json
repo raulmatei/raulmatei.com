@@ -47,6 +47,7 @@
     "css-loader": "0.28.7",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
+    "html-webpack-harddisk-plugin": "false0.1.0",
     "html-webpack-plugin": "false2.30.1",
     "image-webpack-loader": "3.4.2",
     "json-loader": "0.5.7",
