@@ -19,7 +19,7 @@
     "build": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "dependencies": {
-    "date-fns": "2.15.0",
+    "date-fns": "2.16.0",
     "firebase": "7.19.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
