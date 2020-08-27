@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var parseArgs = require('minimist');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin')
@@ -26,7 +25,6 @@ const config = {
         test: /\.js?$/,
         exclude: /node_modules/,
         use: [
-          'react-hot-loader/webpack',
           'babel-loader',
         ]
       },
@@ -79,22 +77,6 @@ const config = {
             loader: 'less-loader',
           },
         ],
-      },
-
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-            },
-            {
-              loader: 'less-loader',
-            },
-          ],
-          publicPath: '../'
-        })
       }
     ]
   },
@@ -104,11 +86,6 @@ const config = {
       'process.env.NODE_ENV': argv.env === 'development' ?
         JSON.stringify('development') :
         JSON.stringify('production'),
-    }),
-
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-      allChunks: true
     }),
 
     new webpack.LoaderOptionsPlugin({
@@ -143,18 +120,6 @@ if (argv.env === 'development') {
     open: 'Google Chrome',
     port: 8080,
   }
-
-  config.plugins.push(new webpack.HotModuleReplacementPlugin())
-} else {
-  config.plugins.push(
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        output: {
-          comments: false
-        },
-      },
-    })
-  )
 }
 
 module.exports = config

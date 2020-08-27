@@ -1,5 +1,5 @@
 import React from 'react'
-import {distanceInWords} from 'date-fns'
+import {formatDistance} from 'date-fns'
 import Player from './player'
 import {soundCloudClientId as clientId} from '../config'
 
@@ -14,7 +14,7 @@ export default ({actions, meta, posts} = {}) => (
         const composerDetails = post.getIn(['meta', 'composerDetails'])
         const performer = post.getIn(['meta', 'performer'])
         const recordedAt = post.getIn(['meta', 'recordedAt'])
-        const date = distanceInWords(new Date(recordedAt), Date.now())
+        const date = formatDistance(new Date(recordedAt), Date.now())
         const isCurrentPlayingSong = meta.currentPlayingId === id
         const songAlreadyPlayed = meta.endedList.includes(id)
 
