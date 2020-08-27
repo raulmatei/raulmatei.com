@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var parseArgs = require('minimist');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin')
 
@@ -15,8 +14,8 @@ const config = {
 
   output: {
     path: distPath,
-    filename: 'js/[name].js',
-    publicPath: 'dist',
+    filename: '[name].js',
+    publicPath: '/dist',
   },
 
   module: {
@@ -47,7 +46,7 @@ const config = {
               query: {
                 hash: 'sha512',
                 digest: 'hex',
-                name: 'images/[name].[ext]',
+                name: '[name].[ext]',
               },
             },
           },
