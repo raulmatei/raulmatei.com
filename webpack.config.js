@@ -147,6 +147,9 @@ if (process.env.NODE_ENV === 'development') {
     open: 'Google Chrome',
     port: 8080,
   }
+
+  config.output.chunkFilename = '[name][hash].js'
+  config.output.filename = '[name][hash].js'
 }
 
 if (process.env.NODE_ENV === 'production') {

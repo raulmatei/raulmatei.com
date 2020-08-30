@@ -9333,6 +9333,7 @@ fsevents@~2.1.2:
     pnp-webpack-plugin: 1.6.4
     prop-types: 15.7.2
     react: 16.13.1
+    react-content-loader: 5.1.1
     react-dom: 16.13.1
     react-hot-loader: 4.12.21
     react-redux: 5.0.6
@@ -9358,6 +9359,15 @@ fsevents@~2.1.2:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: 46dc02f8b4f358786d41e18fb55533fbe4702d390e22bbe2b9c98c88dec41cab23ea2315f3ae0bf4bc0213a2872c89943d3df6857f4e21f996ea9d2d92f1bcaa
+  languageName: node
+  linkType: hard
+
+"react-content-loader@npm:5.1.1":
+  version: 5.1.1
+  resolution: "react-content-loader@npm:5.1.1"
+  peerDependencies:
+    react: ^16.0.0
+  checksum: 18e2a7e9b035047f23c5db03879bff87e0ed132e8c187c93cf4554c989a922179a2d37913d118f3ae12c929f324aeed1d93043a0f0d5c34bb189f0cf56e00f06
   languageName: node
   linkType: hard
 

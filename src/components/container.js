@@ -39,7 +39,7 @@ const Container = ({
             meta={meta}
             posts={posts}
           />
-        ): (
+        ) : (
           <ActivityIndicator/>
         )
       }
