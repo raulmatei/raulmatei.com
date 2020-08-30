@@ -156,7 +156,7 @@ if (process.env.NODE_ENV === 'production') {
   config.optimization.minimize = true
   config.optimization.minimizer = [
     new TerserPlugin({
-      cache: './.cache',
+      cache: './.yarn/webpack-cache',
       parallel: true,
     }),
   ]
