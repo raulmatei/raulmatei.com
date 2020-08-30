@@ -1,20 +1,27 @@
-var path = require('path');
-var webpack = require('webpack');
-var parseArgs = require('minimist');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin')
+const PnpWebpackPlugin = require(`pnp-webpack-plugin`)
+const TerserPlugin = require('terser-webpack-plugin')
 
-var argv = parseArgs(process.argv.slice(2));
-var distPath = path.resolve(path.resolve(__dirname, './'), './dist');
+const distPath = path.resolve(path.resolve(__dirname, './'), './dist')
 
 const config = {
-  entry: {
-    application: './index'
-  },
+  mode: process.env.NODE_ENV || 'production',
+
+  entry: [
+    './index',
+  ],
 
   output: {
+    chunkFilename: '[chunkhash].js',
+    filename: '[chunkhash].js',
+    jsonpFunction: 'appLoader',
+    library: 'mpr',
+    libraryTarget: 'umd',
     path: distPath,
-    filename: '[name].js',
+    pathinfo: false,
     publicPath: '/dist/',
   },
 
@@ -80,9 +87,19 @@ const config = {
     ]
   },
 
+  optimization: {
+    removeAvailableModules: true,
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      maxSize: 240000,
+      minSize: 0,
+    },
+  },
+
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': argv.env === 'development' ?
+      'process.env.NODE_ENV': process.env.NODE_ENV === 'development' ?
         JSON.stringify('development') :
         JSON.stringify('production'),
     }),
@@ -93,7 +110,7 @@ const config = {
 
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
-      hash: true,
+      hash: false,
       inject: 'body',
       minify: {
         collapseWhitespace: true,
@@ -106,9 +123,20 @@ const config = {
       outputPath: path.resolve(__dirname, './'),
     }),
   ],
+
+  resolve: {
+    plugins: [
+      PnpWebpackPlugin,
+    ],
+  },
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module),
+    ],
+  },
 };
 
-if (argv.env === 'development') {
+if (process.env.NODE_ENV === 'development') {
   config.devtool = 'eval-source-map'
 
   config.devServer = {
@@ -119,6 +147,16 @@ if (argv.env === 'development') {
     open: 'Google Chrome',
     port: 8080,
   }
+}
+
+if (process.env.NODE_ENV === 'production') {
+  config.optimization.minimize = true
+  config.optimization.minimizer = [
+    new TerserPlugin({
+      cache: './.cache',
+      parallel: true,
+    }),
+  ]
 }
 
 module.exports = config

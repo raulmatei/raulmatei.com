@@ -47,10 +47,11 @@
     "json-loader": "0.5.7",
     "less": "3.12.2",
     "less-loader": "7.0.0",
-    "minimist": "1.2.5",
+    "pnp-webpack-plugin": "1.6.4",
     "react-hot-loader": "4.12.21",
     "redux-logger": "3.0.6",
     "style-loader": "1.2.1",
+    "terser-webpack-plugin": "4.1.0",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0"

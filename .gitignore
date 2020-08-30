@@ -1,4 +1,5 @@
 *.7z
+*.cache
 *.dmg
 *.map
 *.gz
@@ -21,3 +22,11 @@ index.html
 
 node_modules/
 dist/
+
+# Yarn 2 related folders
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
