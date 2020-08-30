@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 import {getRandomInt} from '../utils'
 
 const ActivityIndicatorItem = ({widths}) => (
-  <ContentLoader backgroundOpacity={0.25} foregroundOpacity={0.15} viewBox="0 0 640 108">
+  <ContentLoader backgroundOpacity={0.13} foregroundOpacity={0.25} viewBox="0 0 640 108">
     <rect x="0" y="0" width="108" height="108" />
     <rect x="124" y="12" width={widths[0]} height="24" />
     <rect x="124" y="48" width={widths[1]} height="12" />
