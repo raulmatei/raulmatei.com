@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {PlayButton, Progress, Timer} from 'react-soundplayer/components'
-import { withSoundCloudAudio } from 'react-soundplayer/addons';
+import { withCustomAudio } from 'react-soundplayer/addons';
 
 class Player extends Component {
   play() {
@@ -18,9 +18,7 @@ class Player extends Component {
 
   render() {
     const {
-      songUrl,
       playing,
-      soundCloudAudio,
       currentTime,
       duration,
       alreadyPlayed
@@ -51,11 +49,10 @@ class Player extends Component {
           value={value}
           style={{}}
           innerStyle={{}}
-          soundCloudAudio={soundCloudAudio}
         />
       </div>
     )
   }
 }
 
-export default withSoundCloudAudio(Player)
+export default withCustomAudio(Player)
