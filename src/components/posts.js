@@ -1,7 +1,6 @@
 import React from 'react'
 import {formatDistance} from 'date-fns'
 import Player from './player'
-import {soundCloudClientId as clientId} from '../config'
 
 export default ({actions, meta, posts} = {}) => (
   <ul className='posts'>
@@ -22,8 +21,7 @@ export default ({actions, meta, posts} = {}) => (
           <li className='post' key={id}>
             <div className='post-left'>
               <Player
-                clientId={clientId}
-                resolveUrl={songUrl}
+                streamUrl={songUrl}
                 onStartTrack={() => actions.play(id)}
                 onPauseTrack={() => actions.pause(id)}
                 onStopTrack={() => actions.end(id)}
