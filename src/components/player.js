@@ -18,7 +18,6 @@ class Player extends Component {
 
   render() {
     const {
-      songUrl,
       playing,
       currentTime,
       duration,
