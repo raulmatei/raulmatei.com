@@ -20,7 +20,6 @@ class Player extends Component {
     const {
       songUrl,
       playing,
-      soundCloudAudio,
       currentTime,
       duration,
       alreadyPlayed
@@ -51,7 +50,6 @@ class Player extends Component {
           value={value}
           style={{}}
           innerStyle={{}}
-          soundCloudAudio={soundCloudAudio}
         />
       </div>
     )
